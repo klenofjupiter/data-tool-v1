@@ -25,6 +25,8 @@ class App extends Component {
     this.drawPermission = this.drawPermission.bind(this);
     this.normToggle = this.normToggle.bind(this);
     this.clearPlot = this.clearPlot.bind(this);
+    this.yearMinus = this.yearMinus.bind(this);
+    this.yearPlus = this.yearPlus.bind(this);
   }
 
   addLine(){
@@ -44,6 +46,7 @@ clearPlot() {
   this.setState({...initialState})
   d3.selectAll("svg > *").remove();
   d3.selectAll(".sidebar > *").remove();
+  d3.selectAll(".year-button").style('display', 'none')
 }
 normToggle() {
   this.setState({normed: !this.state.normed})
@@ -87,9 +90,17 @@ selectEndYear(evt) {
   selectValue(evt){
     this.setState({ locus_value: evt.target.value })
   }
+
+  yearMinus() {
+    this.setState({start_year : this.state.start_year - 1, end_year: this.state.end_year - 1})
+  }
+  yearPlus() {
+    this.setState({start_year: this.state.start_year + 1 , end_year: this.state.end_year + 1})
+  }
   componentDidMount(){}
 
   render() {
+    console.log('startyear', this.state.start_year)
     return (
       <div className="App">
           <div className = "pageHolder">
@@ -161,6 +172,7 @@ selectEndYear(evt) {
                         <br/>*/}
           </div>
          <DataMaker normed={this.state.normed} lines={this.state.lines_to_draw} drawLines={this.state.drawLines} plotted={this.state.plotted} start_year={this.state.start_year} end_year={this.state.end_year} metric={this.state.metric} min_y={this.state.min_y} max_y={this.state.max_y}/>
+      <button className="year-button minus" onClick={this.yearMinus} disabled={(this.state.start_year > 1990 ? false : true)}>back one</button> <button className="year-button plus" onClick={this.yearPlus} disabled={(this.state.end_year && this.state.end_year < 2016) ? false : true}>fwd one</button>
       </div>
     );
   }

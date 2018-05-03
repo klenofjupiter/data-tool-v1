@@ -6,7 +6,8 @@ body {
 }
 
 svg {
- height: 1800px;
+ /*height: 1800px;*/
+ height: 500px;
  width: 1700px;
  margin-left: 10px;
  padding-top: 100px;
@@ -48,6 +49,13 @@ select {
 button {
   font-family: inherit;
   padding: 5px;
+}
+.year-button {
+  margin: 5px;
+  display: none;
+}
+.minus {
+  margin-left: 20px;
 }
 .sidebar {
   box-shadow: 4px 4px 8px 0px rgba( 0, 0, 0, 0.2 );
