@@ -92,15 +92,14 @@ selectEndYear(evt) {
   }
 
   yearMinus() {
-    this.setState({start_year : this.state.start_year - 1, end_year: this.state.end_year - 1})
+    this.setState({start_year : Number(this.state.start_year) - 1, end_year: Number(this.state.end_year) - 1})
   }
   yearPlus() {
-    this.setState({start_year: this.state.start_year + 1 , end_year: this.state.end_year + 1})
+    this.setState({start_year: Number(this.state.start_year) + 1 , end_year: Number(this.state.end_year) + 1})
   }
   componentDidMount(){}
 
   render() {
-    console.log('startyear', this.state.start_year)
     return (
       <div className="App">
           <div className = "pageHolder">
@@ -113,7 +112,7 @@ selectEndYear(evt) {
             </li>
             {/*<br/> */}
             <li>
-            <select id = "startYearSelect" disabled={ this.state.plotted ? true : false } value={this.state.start_year ? this.state.start_year : "default"} onChange={this.selectStartYear}>
+            <select id = "startYearSelect" disabled={ this.state.plotted ? true : (this.state.inData ? false : true) } value={this.state.start_year ? this.state.start_year : "default"} onChange={this.selectStartYear}>
               <option disabled = "disabled" value="default"> 2. Select a Start Year </option>
               { year_arr(1990, 2016).map((year) => <option key={year} value={year}>{year}</option>)}
             </select> 
